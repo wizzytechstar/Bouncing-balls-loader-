@@ -1,0 +1,33 @@
+:root{
+      --bg: 255 247 237;  /* warm peach */
+      --fg: 17 24 39;     /* slate */
+      --accent1: 99 102 241;  /* indigo */
+      --accent2: 16 185 129;  /* emerald */
+      --accent3: 236 72 153;  /* pink */
+    }
+    .theme-cool{ --bg: 240 249 255; --accent1: 14 165 233; --accent2: 99 102 241; --accent3: 56 189 248; }
+    .theme-dark{ --bg: 10 14 24; --fg: 248 250 252; --accent1: 59 130 246; --accent2: 16 185 129; --accent3: 251 191 36; }
+    .theme-candy{ --bg: 255 240 246; --accent1: 236 72 153; --accent2: 217 70 239; --accent3: 99 102 241; }
+
+    body { font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; }
+
+    /* Bounce motion */
+    @keyframes bounceY {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-36%) scale(1.06); }
+    }
+
+    /* Soft shimmer under the balls */
+    @keyframes pulseShadow {
+      0%, 100% { transform: scaleX(1); opacity: .35; }
+      50% { transform: scaleX(.85); opacity: .15; }
+    }
+
+    /* Loader container timing */
+    .is-paused .ball,
+    .is-paused .shadow { animation-play-state: paused !important; }
+
+    /* Accessibility: reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .ball, .shadow { animation: none !important; }
+    }

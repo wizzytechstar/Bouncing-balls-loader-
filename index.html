@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Bouncer</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bouncing Balls Loader </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-[rgb(var(--bg))] text-[rgb(var(--fg))] selection:bg-indigo-200/60 selection:text-indigo-900 transition-colors duration-500">
+  <main class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Decorative floating shapes -->
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute -top-20 -right-16 w-72 h-72 rounded-full bg-[rgb(var(--accent1))]/10 blur-2xl"></div>
+      <div class="absolute -bottom-24 -left-10 w-80 h-80 rounded-full bg-[rgb(var(--accent2))]/10 blur-2xl"></div>
+      <div class="absolute top-1/3 -left-20 w-52 h-52 rounded-full bg-[rgb(var(--accent3))]/10 blur-2xl"></div>
+    </div>
+
+    <!-- Card -->
+    <section class="relative z-10 w-full max-w-xl mx-auto p-6 sm:p-8">
+      <div class="rounded-2xl bg-white/70 backdrop-blur-xl shadow-xl ring-1 ring-black/5 p-6 sm:p-8">
+        <header class="flex items-start justify-between gap-4">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">Bouncing Balls Loader</h1>
+            <p class="text-sm text-slate-600 mt-1">A smooth, looping loader with playful motion.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="pauseBtn" class="px-3 py-2 rounded-lg bg-[rgb(var(--accent1))] text-white text-sm font-semibold shadow hover:opacity-90 active:opacity-85 transition">
+              Pause
+            </button>
+            <div class="relative">
+              <button id="themeBtn" class="px-3 py-2 rounded-lg border border-black/10 bg-white text-sm font-semibold hover:bg-black/5 transition">
+                Theme
+              </button>
+              <div id="themeMenu" class="hidden absolute right-0 mt-2 w-40 rounded-xl bg-white shadow-lg ring-1 ring-black/5 p-2">
+                <button data-theme="default" class="w-full text-left px-3 py-2 rounded-lg hover:bg-black/5 text-sm">Warm</button>
+                <button data-theme="theme-cool" class="w-full text-left px-3 py-2 rounded-lg hover:bg-black/5 text-sm">Cool</button>
+                <button data-theme="theme-dark" class="w-full text-left px-3 py-2 rounded-lg hover:bg-black/5 text-sm">Dark</button>
+                <button data-theme="theme-candy" class="w-full text-left px-3 py-2 rounded-lg hover:bg-black/5 text-sm">Candy</button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Loader -->
+        <div id="loaderWrap" class="mt-8 sm:mt-10 flex flex-col items-center gap-6">
+          <div class="relative w-full max-w-[360px] h-28 sm:h-32">
+            <!-- ground/shadows -->
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-[82%] h-8">
+              <div class="shadow absolute bottom-0 left-0 right-0 h-3 rounded-full bg-black/10 animate-[pulseShadow_1.2s_ease-in-out_infinite]"></div>
+            </div>
+
+            <!-- balls row -->
+            <div class="absolute inset-x-0 bottom-4 flex items-end justify-between px-2 sm:px-4">
+              <!-- Ball 1 -->
+              <div class="flex flex-col items-center justify-end w-1/4">
+                <div class="ball size-7 sm:size-8 rounded-full bg-[rgb(var(--accent1))] shadow-lg animate-[bounceY_1.2s_ease-in-out_infinite]"></div>
+              </div>
+              <!-- Ball 2 -->
+              <div class="flex flex-col items-center justify-end w-1/4">
+                <div class="ball size-8 sm:size-9 rounded-full bg-[rgb(var(--accent2))] shadow-lg animate-[bounceY_1.2s_ease-in-out_infinite] [animation-delay:.12s]"></div>
+              </div>
+              <!-- Ball 3 -->
+              <div class="flex flex-col items-center justify-end w-1/4">
+                <div class="ball size-9 sm:size-10 rounded-full bg-[rgb(var(--accent3))] shadow-lg animate-[bounceY_1.2s_ease-in-out_infinite] [animation-delay:.24s]"></div>
+              </div>
+              <!-- Ball 4 -->
+              <div class="flex flex-col items-center justify-end w-1/4">
+                <div class="ball size-7 sm:size-8 rounded-full bg-gradient-to-br from-[rgb(var(--accent2))] to-[rgb(var(--accent1))] shadow-lg animate-[bounceY_1.2s_ease-in-out_infinite] [animation-delay:.36s]"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- progress text -->
+          <div class="text-sm text-slate-600 flex items-center gap-2">
+            <span class="inline-block size-2 rounded-full bg-[rgb(var(--accent1))] animate-pulse"></span>
+            Loading, please wait…
+          </div>
+
+          <!-- controls -->
+          <div class="flex items-center gap-3">
+            <label class="flex items-center gap-2 text-sm">
+              Speed
+              <input id="speedRange" type="range" min="60" max="200" value="120" class="accent-[rgb(var(--accent1))]">
+            </label>
+            <label class="flex items-center gap-2 text-sm">
+              Size
+              <input id="sizeRange" type="range" min="70" max="130" value="100" class="accent-[rgb(var(--accent2))]">
+            </label>
+          </div>
+        </div>
+
+        <!-- Footer mini note -->
+        <div class="mt-6 text-[13px] text-slate-500">
+          Tip: Use the Theme button to try different vibes.
+        </div>
+      </div>
+    </section>
+  </main>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
